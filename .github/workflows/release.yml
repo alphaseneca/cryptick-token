@@ -1,0 +1,45 @@
+name: Release Suite
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  bundle-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout consolidated repository with submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Package Documentation & Schematics
+        run: |
+          VERSION="${GITHUB_REF_NAME}"
+          BUNDLE_DIR="cryptick-token-suite-${VERSION}"
+          mkdir -p "${BUNDLE_DIR}"
+
+          # Bundle website and documentation
+          cp index.html "${BUNDLE_DIR}/"
+          cp -r assets/ "${BUNDLE_DIR}/assets"
+          cp README.md LICENSE "${BUNDLE_DIR}/"
+
+          # Create distribution archives
+          tar -czvf "cryptick-token-suite-${VERSION}.tar.gz" "${BUNDLE_DIR}"
+          zip -r "cryptick-token-suite-${VERSION}.zip" "${BUNDLE_DIR}"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Cryptick Token Suite ${{ github.ref_name }}
+          generate_release_notes: true
+          draft: false
+          prerelease: false
+          files: |
+            cryptick-token-suite-*.tar.gz
+            cryptick-token-suite-*.zip
