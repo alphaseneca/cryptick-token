@@ -1,0 +1,12 @@
+[submodule "cryptick-token-pcb"]
+	path = cryptick-token-pcb
+	url = https://github.com/alphaseneca/cryptick-token-pcb.git
+[submodule "cryptick-token-code"]
+	path = cryptick-token-code
+	url = https://github.com/alphaseneca/cryptick-token-code.git
+[submodule "cryptick-token-daemon"]
+	path = cryptick-token-daemon
+	url = https://github.com/alphaseneca/cryptick-token-daemon.git
+[submodule "cryptick-token-extension"]
+	path = cryptick-token-extension
+	url = https://github.com/alphaseneca/cryptick-token-extension.git
