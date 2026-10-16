@@ -34,7 +34,7 @@ This repository serves as the central consolidator and product home for the enti
 
 | Submodule / Component | Repository | Description | Tech Stack |
 | :--- | :--- | :--- | :--- |
-| **Hardware & PCB** | [`cryptick-token-pcb`](https://github.com/alphaseneca/cryptick-token-pcb) | 4-layer PCB design, schematics, BOM, and JLCPCB manufacturing release | KiCad 8.x, KiForge |
+| **Hardware & PCB** | [`cryptick-token-pcb`](https://github.com/alphaseneca/cryptick-token-pcb) | 2-layer PCB design, schematics, BOM, and JLCPCB manufacturing release | KiCad 8.x, KiForge |
 | **Firmware & Core** | [`cryptick-token-code`](https://github.com/alphaseneca/cryptick-token-code) | ESP32-S3 firmware, CTAP2.1, PIV CCID applet, BLE GATT, and LittleFS enclave | C++ / PlatformIO |
 | **Desktop Daemon & CLI** | [`cryptick-token-daemon`](https://github.com/alphaseneca/cryptick-token-daemon) | Background daemon, `cryptick` CLI, macOS SmartCard / Linux PAM, OpenSSH middleware | Rust (Cargo) |
 | **Browser Extension** | [`cryptick-token-extension`](https://github.com/alphaseneca/cryptick-token-extension) | Manifest V3 WebExtension passkey bridge and live 30s TOTP companion | JavaScript / MV3 |
@@ -91,7 +91,7 @@ git submodule update --remote --merge
 | **100% Open Hardware & Code** | **Full KiCad & C++/Rust** | Proprietary Closed | Proprietary Closed | Open Source |
 | **Standalone TOTP 2FA Display** | **Direct on Screen** | Requires App | Not Supported | Not Supported |
 | **1-Click Computer Login** | **macOS & Linux PAM** | Complex Setup | Limited | Limited |
-| **Rechargeable Battery** | **Integrated LiPo (TP4056)** | No Battery | No Battery | No Battery |
+| **Rechargeable Battery** | **Integrated LiPo (BQ25185)** | No Battery | No Battery | No Battery |
 | **Starting Price** | **$49 DevKit / $69 Pro** | $55 | $90+ | $50 |
 
 ---
