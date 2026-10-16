@@ -22,7 +22,7 @@
 
 - **What You See Is What You Sign (WYSIWYS)**: 0.96" high-contrast OLED display directly shows the verified relying party domain and username before signing, preventing phishing attacks.
 - **Biometric Optical Enclave**: R558S capacitive/optical fingerprint sensor (508 DPI, 120 slots) keeps biometric templates completely offline in isolated silicon.
-- **Dual-Mode Connectivity**: Plug in directly via native **USB-C OTG** or authenticate wirelessly using **Bluetooth Low Energy (BLE 5.0)** with dual-GATT architecture.
+- **Dual-Mode Connectivity**: Plug in directly via native **USB OTG** or authenticate wirelessly using **Bluetooth Low Energy (BLE 5.0)** with dual-GATT architecture.
 - **Full Protocol Suite**: FIDO2 CTAP2.1 Passkeys, NIST SP 800-73-5 PIV SmartCard, RFC 6238 OATH-TOTP standalone authenticator, and native OpenSSH hardware keys.
 - **1-Click Computer Login**: Instant macOS SmartCard pairing (`sc_auth` / CryptoTokenKit) and Linux PAM login.
 
@@ -87,7 +87,7 @@ git submodule update --remote --merge
 | **Physical Display (WYSIWYS)** | **0.96" OLED Screen** | None (Blind Touch) | None (Blind Touch) | None |
 | **Biometric Fingerprint Sensor** | **508 DPI Enclave** | None | Capacitive Area | None |
 | **Wireless Bluetooth (BLE 5.0)** | **Dual-GATT (iOS/Android/Laptops)** | NFC Only | None (Wired Only) | NFC Only |
-| **Wired Connection** | **Native USB-C OTG** | USB-A / USB-C | USB-A / USB-C | USB-A / USB-C |
+| **Wired Connection** | **Native USB OTG** | USB | USB | USB |
 | **100% Open Hardware & Code** | **Full KiCad & C++/Rust** | Proprietary Closed | Proprietary Closed | Open Source |
 | **Standalone TOTP 2FA Display** | **Direct on Screen** | Requires App | Not Supported | Not Supported |
 | **1-Click Computer Login** | **macOS & Linux PAM** | Complex Setup | Limited | Limited |

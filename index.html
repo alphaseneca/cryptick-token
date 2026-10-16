@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Cryptick Token — The Security Key with a Screen</title>
-  <meta name="description" content="Open-source biometric hardware security key. Protect your Google, Apple, and GitHub accounts with an on-device verification display, fingerprint touch, and dual USB-C + Bluetooth.">
+  <meta name="description" content="Open-source biometric hardware security key. Protect your Google, Apple, and GitHub accounts with an on-device verification display, fingerprint touch, and dual USB + Bluetooth.">
   <link rel="icon" type="image/png" href="assets/icon-48.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1061,7 +1061,7 @@
           </div>
           <div class="trust-item">
             <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-            <span>USB-C &amp; Bluetooth Wireless</span>
+            <span>USB &amp; Bluetooth Wireless</span>
           </div>
           <div class="trust-item">
             <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
@@ -1110,9 +1110,9 @@
             <div class="feature-icon">
               <svg viewBox="0 0 24 24"><path d="M17.71 7.71L12 2h-1v7.59L6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 11 14.41V22h1l5.71-5.71-4.3-4.29 4.3-4.29zM13 5.83l1.88 1.88L13 9.59V5.83zm1.88 10.46L13 18.17v-3.76l1.88 1.88z"/></svg>
             </div>
-            <h3>USB-C &amp; Wireless Bluetooth</h3>
+            <h3>USB &amp; Wireless Bluetooth</h3>
             <p>
-              Use it everywhere. Plug into your Mac, Windows, or Linux machine via native USB-C, or connect wirelessly over Bluetooth to your iPhone, iPad, or Android phone.
+              Use it everywhere. Plug into your Mac, Windows, or Linux machine via native USB, or connect wirelessly over Bluetooth to your iPhone, iPad, or Android phone.
             </p>
           </div>
 
@@ -1165,7 +1165,7 @@
           <div class="demo-stage">
             <!-- Hardware Token Mockup -->
             <div class="hardware-chassis-wrap">
-              <div class="hardware-usb-cap" title="USB-C Connector (Plug & Play)"></div>
+              <div class="hardware-usb-cap" title="USB Connector (Plug & Play)"></div>
               <div class="hardware-body">
                 <!-- OLED Display -->
                 <div class="oled-screen" id="oledScreen">
@@ -1264,7 +1264,7 @@
               </tr>
               <tr>
                 <td><strong>Wireless Connectivity</strong><br><span style="font-size:12px; color:var(--text-dim)">iPhone, Android, Mac &amp; PC support</span></td>
-                <td class="col-highlight"><span class="win-pill">✓ Bluetooth LE 5.0 + NFC + USB-C</span></td>
+                <td class="col-highlight"><span class="win-pill">✓ Bluetooth LE 5.0 + NFC + USB</span></td>
                 <td><span class="loss-text">✕ NFC + USB (No BLE)</span></td>
                 <td><span class="loss-text">✕ NFC + USB (Discontinued BLE)</span></td>
                 <td><span class="neutral-text">BLE on select models ($149+)</span></td>
@@ -1349,8 +1349,8 @@
                 <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> <span>Exposed matte black &amp; gold finish</span></li>
                 <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> <span>OLED display &amp; 5-way navigation button</span></li>
                 <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> <span>Biometric fingerprint touch sensor</span></li>
-                <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> <span>USB-C and Bluetooth Low Energy</span></li>
-                <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> <span>USB-C braided cable included</span></li>
+                <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> <span>USB and Bluetooth Low Energy</span></li>
+                <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> <span>USB braided cable included</span></li>
               </ul>
             </div>
             <button class="btn btn-ghost" style="width:100%; padding:14px;" onclick="openModal('devkit')">
@@ -1451,7 +1451,7 @@
               <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
             </div>
             <div class="faq-a">
-              Yes. Cryptick connects wirelessly to iPhones, iPads, and Android devices using standard Bluetooth Low Energy, as well as plugging directly into USB-C ports.
+              Yes. Cryptick connects wirelessly to iPhones, iPads, and Android devices using standard Bluetooth Low Energy, as well as plugging directly into USB ports.
             </div>
           </div>
         </div>
@@ -1641,7 +1641,7 @@
         startTotpCountdown();
       } else if (scenario === 'piv') {
         modeHeader.textContent = 'PIV SMARTCARD (SP 800-73)';
-        statusHeader.textContent = 'USB-C ● SLOT 9A';
+        statusHeader.textContent = 'USB ● SLOT 9A';
         oledTitle.textContent = 'macOS & Git SSH Auth';
         oledDesc.innerHTML = 'Subject: CN=Alex Mercer<br>Algorithm: NIST P-256 (ECC)';
         oledBadge.innerHTML = '<span>[ TOUCH SENSOR TO SIGN ]</span>';
