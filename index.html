@@ -363,54 +363,307 @@
       line-height: 1.6;
     }
 
-    /* Interactive Experience Demo */
-    .demo-box {
-      max-width: 800px;
+    /* Interactive Experience Demo - Tactile Hardware Simulation */
+    .demo-container {
+      max-width: 1060px;
       margin: 0 auto;
       background: var(--bg-card);
       border: 1px solid var(--surface-border-strong);
       border-radius: var(--radius-xl);
       padding: 36px 32px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 229, 255, 0.05);
     }
-    .demo-token-preview {
-      background: #020406;
-      border: 2px solid #232D3F;
+    .demo-tabs {
+      display: flex;
+      gap: 10px;
+      border-bottom: 1px solid var(--surface-border);
+      padding-bottom: 20px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .demo-tab-btn {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      color: var(--text-muted);
+      padding: 10px 18px;
+      border-radius: var(--radius-md);
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s var(--ease);
+    }
+    .demo-tab-btn:hover {
+      color: #FFF;
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--surface-border-strong);
+    }
+    .demo-tab-btn.active {
+      background: var(--primary-dim);
+      border-color: var(--primary-border);
+      color: var(--primary);
+      box-shadow: 0 0 16px rgba(0, 229, 255, 0.2);
+    }
+    .demo-stage {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      align-items: center;
+    }
+    @media (max-width: 860px) {
+      .demo-stage {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Physical Token Mockup */
+    .hardware-chassis-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .hardware-usb-cap {
+      width: 52px;
+      height: 18px;
+      background: linear-gradient(180deg, #5A6273, #2B3342);
+      border-radius: 4px 4px 0 0;
+      border: 1px solid #717D94;
+      border-bottom: none;
+      position: relative;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.4);
+    }
+    .hardware-usb-cap::after {
+      content: '';
+      position: absolute;
+      top: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 26px;
+      height: 4px;
+      background: #10141C;
+      border-radius: 2px;
+    }
+    .hardware-body {
+      width: 320px;
+      background: linear-gradient(155deg, #1C2331 0%, #0E131C 60%, #080B10 100%);
+      border: 2px solid #2A364C;
+      border-radius: 28px;
+      padding: 24px 22px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      user-select: none;
+    }
+    .hardware-lanyard-slot {
+      position: absolute;
+      bottom: 12px;
+      width: 38px;
+      height: 6px;
+      background: #04070B;
+      border-radius: 3px;
+      border: 1px solid #202A3C;
+    }
+
+    /* OLED Screen */
+    .oled-screen {
+      width: 100%;
+      background: #010408;
+      border: 2px solid #1C2638;
+      border-radius: 12px;
+      padding: 14px 14px 12px;
+      font-family: 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace;
+      color: #00E5FF;
+      box-shadow: inset 0 0 24px rgba(0, 229, 255, 0.12), 0 0 12px rgba(0, 229, 255, 0.08);
+      position: relative;
+      min-height: 140px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+    }
+    .oled-screen.state-alert {
+      color: #FF5252;
+      border-color: #FF5252;
+      box-shadow: inset 0 0 24px rgba(255, 82, 82, 0.2), 0 0 14px rgba(255, 82, 82, 0.15);
+    }
+    .oled-screen.state-success {
+      color: #00E676;
+      border-color: #00E676;
+      box-shadow: inset 0 0 24px rgba(0, 230, 118, 0.2), 0 0 14px rgba(0, 230, 118, 0.15);
+    }
+    .oled-header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      opacity: 0.85;
+      border-bottom: 1px dashed currentColor;
+      padding-bottom: 6px;
+      margin-bottom: 8px;
+    }
+    .oled-content-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .oled-title {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+      margin-bottom: 4px;
+      word-break: break-all;
+    }
+    .oled-desc {
+      font-size: 11.5px;
+      opacity: 0.85;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+    .oled-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    /* Biometric Fingerprint Sensor */
+    .biometric-sensor-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .biometric-sensor {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #152233 0%, #080D14 100%);
+      border: 2px solid rgba(0, 229, 255, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s var(--ease);
+      box-shadow: 0 0 18px rgba(0, 229, 255, 0.15);
+    }
+    .biometric-sensor.pulsing {
+      animation: sensorPulse 2s infinite ease-in-out;
+    }
+    .biometric-sensor:hover {
+      transform: scale(1.05);
+      border-color: var(--primary);
+      box-shadow: 0 0 24px rgba(0, 229, 255, 0.4);
+    }
+    .biometric-sensor:active {
+      transform: scale(0.96);
+      background: radial-gradient(circle, #00E5FF 0%, #007799 100%);
+    }
+    .biometric-sensor svg {
+      width: 38px;
+      height: 38px;
+      fill: var(--primary);
+      transition: fill 0.2s ease;
+    }
+    .biometric-sensor:active svg {
+      fill: #000;
+    }
+    @keyframes sensorPulse {
+      0%, 100% {
+        box-shadow: 0 0 14px rgba(0, 229, 255, 0.2);
+        border-color: rgba(0, 229, 255, 0.35);
+      }
+      50% {
+        box-shadow: 0 0 28px rgba(0, 229, 255, 0.55);
+        border-color: rgba(0, 229, 255, 0.9);
+      }
+    }
+    .biometric-hint {
+      font-size: 11.5px;
+      color: var(--text-dim);
+      font-weight: 500;
+    }
+
+    /* Scenario Controller Card */
+    .demo-controller {
+      background: rgba(14, 18, 24, 0.6);
+      border: 1px solid var(--surface-border);
       border-radius: var(--radius-lg);
       padding: 24px;
-      margin-bottom: 28px;
-      text-align: center;
-      box-shadow: inset 0 0 30px rgba(0, 229, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
     }
-    .demo-screen-domain {
+    .scenario-title {
       font-size: 18px;
       font-weight: 700;
       color: #FFF;
-      margin-bottom: 6px;
-    }
-    .demo-screen-sub {
-      font-size: 13px;
-      color: var(--primary);
-      margin-bottom: 16px;
-    }
-    .demo-screen-status {
-      display: inline-block;
-      padding: 6px 14px;
-      border-radius: var(--radius-pill);
-      font-size: 12.5px;
-      font-weight: 600;
-      background: rgba(0, 229, 255, 0.12);
-      color: var(--primary);
-      border: 1px solid var(--primary-border);
-    }
-    .demo-controls {
       display: flex;
-      gap: 12px;
-      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+    .scenario-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+    .scenario-actions {
+      display: flex;
       flex-wrap: wrap;
+      gap: 10px;
+    }
+    .scenario-log {
+      background: #05080E;
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      font-family: 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace;
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+    .scenario-log strong {
+      color: var(--primary);
     }
 
-    /* Comparison Table */
+    /* Circular Countdown Ring for TOTP */
+    .totp-timer-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 6px;
+    }
+    .totp-ring-svg {
+      width: 28px;
+      height: 28px;
+      transform: rotate(-90deg);
+    }
+    .totp-ring-bg {
+      fill: none;
+      stroke: rgba(0, 229, 255, 0.2);
+      stroke-width: 3;
+    }
+    .totp-ring-bar {
+      fill: none;
+      stroke: var(--primary);
+      stroke-width: 3;
+      stroke-dasharray: 63;
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 1s linear;
+    }
+
+    /* Comparison Table Matrix */
     .compare-table-wrap {
       overflow-x: auto;
       border-radius: var(--radius-lg);
@@ -420,31 +673,33 @@
     }
     table.compare-table {
       width: 100%;
+      min-width: 900px;
       border-collapse: collapse;
       text-align: left;
-      font-size: 14.5px;
+      font-size: 14px;
     }
     table.compare-table th, table.compare-table td {
-      padding: 16px 22px;
+      padding: 16px 18px;
       border-bottom: 1px solid var(--surface-border);
+      vertical-align: middle;
     }
     table.compare-table th {
       background: #0E1218;
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 600;
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.6px;
     }
     table.compare-table th.col-highlight {
-      background: rgba(0, 229, 255, 0.1);
+      background: rgba(0, 229, 255, 0.12);
       color: var(--primary);
       font-weight: 700;
       border-left: 2px solid var(--primary);
       border-right: 2px solid var(--primary);
     }
     table.compare-table td.col-highlight {
-      background: rgba(0, 229, 255, 0.03);
+      background: rgba(0, 229, 255, 0.04);
       border-left: 2px solid var(--primary);
       border-right: 2px solid var(--primary);
       font-weight: 600;
@@ -453,17 +708,24 @@
     .win-pill {
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 5px;
       background: var(--accent-green-dim);
       color: var(--accent-green);
       padding: 3px 8px;
       border-radius: var(--radius-sm);
-      font-size: 12.5px;
+      font-size: 12px;
       font-weight: 600;
+      white-space: nowrap;
     }
     .loss-text {
       color: var(--text-dim);
-      font-size: 13.5px;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    .neutral-text {
+      color: var(--text-muted);
+      font-size: 13px;
+      white-space: nowrap;
     }
 
     /* Pricing Cards */
@@ -872,30 +1134,89 @@
     <section id="demo">
       <div class="container">
         <div class="section-header">
-          <span class="section-eyebrow">Experience Cryptick</span>
-          <h2 class="section-heading">Try It in Action</h2>
+          <span class="section-eyebrow">Tactile Hardware Simulator</span>
+          <h2 class="section-heading">Experience Cryptick in Real-Time</h2>
           <p class="section-subtext">
-            Simulate what happens when you sign in. Choose an account below and watch the on-device verification.
+            Test how Cryptick's physical OLED screen and biometric sensor protect you across different authentications. Click scenarios below or touch the simulated sensor!
           </p>
         </div>
 
-        <div class="demo-box">
-          <div class="demo-token-preview">
-            <div class="demo-screen-domain" id="demoDomain">Ready for Sign-in</div>
-            <div class="demo-screen-sub" id="demoSub">Click a service below to test</div>
-            <div class="demo-screen-status" id="demoStatus">Awaiting Request</div>
+        <div class="demo-container">
+          <!-- Scenario Tabs -->
+          <div class="demo-tabs">
+            <button class="demo-tab-btn active" id="tab-passkey" onclick="setDemoScenario('passkey')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+              <span>Passkey WebAuthn</span>
+            </button>
+            <button class="demo-tab-btn" id="tab-phishing" onclick="setDemoScenario('phishing')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+              <span>Phishing Interception</span>
+            </button>
+            <button class="demo-tab-btn" id="tab-totp" onclick="setDemoScenario('totp')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42C16.07 4.74 14.12 4 12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+              <span>Standalone 2FA / TOTP</span>
+            </button>
+            <button class="demo-tab-btn" id="tab-piv" onclick="setDemoScenario('piv')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+              <span>macOS SmartCard / PIV</span>
+            </button>
           </div>
 
-          <div class="demo-controls">
-            <button class="btn btn-ghost" onclick="simService('google.com', 'user@gmail.com')">
-              Sign in to Google
-            </button>
-            <button class="btn btn-ghost" onclick="simService('github.com', 'developer')">
-              Sign in to GitHub
-            </button>
-            <button class="btn btn-primary" id="demoTouchBtn" onclick="simApprove()" style="display:none;">
-              Touch Fingerprint Sensor
-            </button>
+          <div class="demo-stage">
+            <!-- Hardware Token Mockup -->
+            <div class="hardware-chassis-wrap">
+              <div class="hardware-usb-cap" title="USB-C Connector (Plug & Play)"></div>
+              <div class="hardware-body">
+                <!-- OLED Display -->
+                <div class="oled-screen" id="oledScreen">
+                  <div class="oled-header-bar">
+                    <span id="oledHeaderMode">WEBAUTHN FIDO2</span>
+                    <span id="oledHeaderStatus">BLE ● BAT 98%</span>
+                  </div>
+                  <div class="oled-content-area">
+                    <div class="oled-title" id="oledTitle">github.com</div>
+                    <div class="oled-desc" id="oledDesc">User: alex.dev@github.com<br>Challenge: 0x9e4a...88f1</div>
+                    <div class="oled-badge-row" id="oledBadge">
+                      <span>[ TOUCH SENSOR TO APPROVE ]</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Biometric Sensor -->
+                <div class="biometric-sensor-wrap">
+                  <div class="biometric-sensor pulsing" id="sensorBtn" onclick="touchSensor()" title="Touch to authenticate with Fingerprint">
+                    <svg viewBox="0 0 24 24"><path d="M17.81 4.47c-.08 0-.16-.02-.23-.06C15.66 3.42 14 3 12.01 3c-1.98 0-3.86.47-5.57 1.41-.24.13-.54.04-.68-.2-.13-.24-.04-.55.2-.68C7.82 2.52 9.86 2 12.01 2c2.13 0 3.99.47 6.03 1.52.25.13.34.43.21.67-.09.18-.26.28-.44.28zM3.5 9.72c-.1 0-.2-.03-.29-.09-.23-.16-.28-.47-.12-.7.99-1.4 2.25-2.5 3.75-3.27.24-.12.54-.03.67.21.12.24.03.54-.21.67-1.39.72-2.56 1.73-3.49 3.03-.08.1-.19.15-.31.15zm17 0c-.12 0-.23-.05-.31-.15-.93-1.3-2.1-2.31-3.49-3.03-.24-.12-.33-.43-.21-.67.12-.24.43-.33.67-.21 1.5.77 2.76 1.87 3.75 3.27.16.23.11.54-.12.7-.09.06-.19.09-.29.09zM12 5.5c-3.58 0-6.5 2.92-6.5 6.5 0 2.45 1.37 4.58 3.39 5.67.24.13.33.43.2.67-.13.24-.43.33-.67.2C5.97 17.15 4.5 14.73 4.5 12c0-4.14 3.36-7.5 7.5-7.5s7.5 3.36 7.5 7.5c0 2.73-1.47 5.15-3.92 6.54-.24.13-.54.04-.67-.2-.13-.24-.04-.54.2-.67 2.02-1.09 3.39-3.22 3.39-5.67 0-3.58-2.92-6.5-6.5-6.5z"/></svg>
+                  </div>
+                  <span class="biometric-hint">Tap Sensor to Verify (0.2s)</span>
+                </div>
+
+                <div class="hardware-lanyard-slot"></div>
+              </div>
+            </div>
+
+            <!-- Scenario Controller -->
+            <div class="demo-controller">
+              <div class="scenario-title" id="controllerTitle">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--primary)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14h2v2h-2zm0-10h2v8h-2z"/></svg>
+                <span>FIDO2 / WebAuthn Sign-In</span>
+              </div>
+              <p class="scenario-desc" id="controllerDesc">
+                Select an account to trigger a WebAuthn ceremony. Cryptick receives the challenge over encrypted BLE or USB, validates the relying party origin, and asks for your physical fingerprint before signing.
+              </p>
+
+              <!-- Scenario Actions -->
+              <div class="scenario-actions" id="controllerActions">
+                <button class="btn btn-ghost" onclick="simService('github.com', 'alex.dev@github.com')">GitHub</button>
+                <button class="btn btn-ghost" onclick="simService('google.com', 'user@gmail.com')">Google</button>
+                <button class="btn btn-ghost" onclick="simService('aws.amazon.com', 'root-admin')">AWS</button>
+                <button class="btn btn-primary" id="touchTriggerBtn" onclick="touchSensor()">Touch Fingerprint</button>
+              </div>
+
+              <!-- Cryptographic Event Log -->
+              <div class="scenario-log" id="controllerLog">
+                <strong>[STATUS]</strong> Ready. Select an account or touch the sensor to simulate authentication.
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -905,10 +1226,10 @@
     <section id="compare">
       <div class="container">
         <div class="section-header">
-          <span class="section-eyebrow">Direct Benchmark</span>
-          <h2 class="section-heading">Cryptick vs. The Competition</h2>
+          <span class="section-eyebrow">Comprehensive Benchmark</span>
+          <h2 class="section-heading">How Cryptick Stacks Up Against the Industry</h2>
           <p class="section-subtext">
-            See how Cryptick stacks up against standard security keys.
+            A comprehensive, transparent comparison of next-generation hardware security versus legacy keys, wallets, and mobile apps.
           </p>
         </div>
 
@@ -916,54 +1237,86 @@
           <table class="compare-table">
             <thead>
               <tr>
-                <th>Capability</th>
-                <th class="col-highlight">Cryptick Token</th>
-                <th>YubiKey 5 NFC</th>
-                <th>YubiKey Bio</th>
+                <th>Security &amp; Hardware Dimension</th>
+                <th class="col-highlight">Cryptick Token Pro</th>
+                <th>YubiKey 5 / Bio</th>
+                <th>Google Titan</th>
+                <th>Hardware Wallets (Ledger/Trezor)</th>
+                <th>Authenticator App / SMS</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Verification Screen</strong></td>
-                <td class="col-highlight"><span class="win-pill">✓ On-Device Display</span></td>
-                <td><span class="loss-text">✕ None (Blind Touch)</span></td>
-                <td><span class="loss-text">✕ None (Blind Touch)</span></td>
+                <td><strong>WYSIWYS Display Screen</strong><br><span style="font-size:12px; color:var(--text-dim)">Visual verification of domain &amp; user</span></td>
+                <td class="col-highlight"><span class="win-pill">✓ 0.96" OLED Screen</span></td>
+                <td><span class="loss-text">✕ Blind Touch (No Screen)</span></td>
+                <td><span class="loss-text">✕ Blind Touch (No Screen)</span></td>
+                <td><span class="win-pill">✓ Built-in Screen</span></td>
+                <td><span class="neutral-text">App Screen (Phishable)</span></td>
               </tr>
               <tr>
-                <td><strong>Biometric Fingerprint</strong></td>
-                <td class="col-highlight"><span class="win-pill">✓ Built-in Touch Sensor</span></td>
-                <td><span class="loss-text">✕ None</span></td>
-                <td><span class="win-pill">✓ Built-in Sensor</span></td>
+                <td><strong>Biometric Fingerprint Matching</strong><br><span style="font-size:12px; color:var(--text-dim)">0.2s capacitive matching in hardware</span></td>
+                <td class="col-highlight"><span class="win-pill">✓ Capacitive Sensor</span></td>
+                <td><span class="neutral-text">Only on Bio model ($95)</span></td>
+                <td><span class="loss-text">✕ None (Tactile Button)</span></td>
+                <td><span class="loss-text">✕ None (PIN Buttons Only)</span></td>
+                <td><span class="neutral-text">Phone OS Dependent</span></td>
               </tr>
               <tr>
-                <td><strong>Wireless Bluetooth</strong></td>
-                <td class="col-highlight"><span class="win-pill">✓ Bluetooth LE 5.0</span></td>
-                <td><span class="loss-text">✕ NFC Only (No Bluetooth)</span></td>
-                <td><span class="loss-text">✕ None (Wired Only)</span></td>
+                <td><strong>Wireless Connectivity</strong><br><span style="font-size:12px; color:var(--text-dim)">iPhone, Android, Mac &amp; PC support</span></td>
+                <td class="col-highlight"><span class="win-pill">✓ Bluetooth LE 5.0 + NFC + USB-C</span></td>
+                <td><span class="loss-text">✕ NFC + USB (No BLE)</span></td>
+                <td><span class="loss-text">✕ NFC + USB (Discontinued BLE)</span></td>
+                <td><span class="neutral-text">BLE on select models ($149+)</span></td>
+                <td><span class="neutral-text">Cellular / Wi-Fi Dependent</span></td>
               </tr>
               <tr>
-                <td><strong>100% Open Source</strong></td>
-                <td class="col-highlight"><span class="win-pill">✓ Fully Auditable</span></td>
-                <td><span class="loss-text">✕ Closed Proprietary</span></td>
-                <td><span class="loss-text">✕ Closed Proprietary</span></td>
+                <td><strong>Standalone 2FA / TOTP</strong><br><span style="font-size:12px; color:var(--text-dim)">Generate and view codes without host</span></td>
+                <td class="col-highlight"><span class="win-pill">✓ On-Device Display &amp; Battery</span></td>
+                <td><span class="loss-text">✕ Requires Companion App</span></td>
+                <td><span class="loss-text">✕ Not Supported</span></td>
+                <td><span class="loss-text">✕ Requires Host App</span></td>
+                <td><span class="win-pill">✓ On Smartphone</span></td>
               </tr>
               <tr>
-                <td><strong>On-Screen 2FA Codes</strong></td>
-                <td class="col-highlight"><span class="win-pill">✓ View Direct on Key</span></td>
-                <td>Requires Phone App</td>
+                <td><strong>SmartCard PIV &amp; SSH Auth</strong><br><span style="font-size:12px; color:var(--text-dim)">macOS login, sudo, git commit signing</span></td>
+                <td class="col-highlight"><span class="win-pill">✓ NIST SP 800-73-5 PIV</span></td>
+                <td><span class="win-pill">✓ YubiKey 5 (Not on Bio)</span></td>
+                <td><span class="loss-text">✕ Not Supported</span></td>
+                <td><span class="loss-text">✕ Not Supported</span></td>
                 <td><span class="loss-text">✕ Not Supported</span></td>
               </tr>
               <tr>
-                <td><strong>Rechargeable Battery</strong></td>
-                <td class="col-highlight"><span class="win-pill">✓ Built-in Battery</span></td>
-                <td><span class="loss-text">✕ No Battery</span></td>
-                <td><span class="loss-text">✕ No Battery</span></td>
+                <td><strong>Open-Source Architecture</strong><br><span style="font-size:12px; color:var(--text-dim)">Auditable PCB, firmware, daemon &amp; bridge</span></td>
+                <td class="col-highlight"><span class="win-pill">✓ 100% Open Hardware &amp; Code</span></td>
+                <td><span class="loss-text">✕ Closed Proprietary Firmware</span></td>
+                <td><span class="loss-text">✕ Closed Proprietary</span></td>
+                <td><span class="neutral-text">Partial (Closed Secure Elements)</span></td>
+                <td><span class="loss-text">✕ Closed Proprietary Apps</span></td>
               </tr>
               <tr>
-                <td><strong>Price</strong></td>
-                <td class="col-highlight"><span class="win-pill">$49 Dev / $69 Pro</span></td>
-                <td>$55</td>
-                <td>$90–$95</td>
+                <td><strong>Phishing Resistance</strong><br><span style="font-size:12px; color:var(--text-dim)">Protection against AiTM / proxy attacks</span></td>
+                <td class="col-highlight"><span class="win-pill">✓ Cryptographic + Visual Origin Binding</span></td>
+                <td><span class="win-pill">✓ Cryptographic FIDO2</span></td>
+                <td><span class="win-pill">✓ Cryptographic FIDO2</span></td>
+                <td><span class="neutral-text">Manual Contract Review</span></td>
+                <td><span class="loss-text">✕ Vulnerable to Phishing Proxies</span></td>
+              </tr>
+              <tr>
+                <td><strong>Integrated Battery</strong><br><span style="font-size:12px; color:var(--text-dim)">Authentication on the go</span></td>
+                <td class="col-highlight"><span class="win-pill">✓ Rechargeable LiPo (Multi-week)</span></td>
+                <td><span class="loss-text">✕ Passive Only (Host Powered)</span></td>
+                <td><span class="loss-text">✕ Passive Only</span></td>
+                <td><span class="win-pill">✓ Internal Battery</span></td>
+                <td><span class="neutral-text">Phone Battery</span></td>
+              </tr>
+              <tr>
+                <td><strong>Price / Value</strong><br><span style="font-size:12px; color:var(--text-dim)">Feature-to-price ratio</span></td>
+                <td class="col-highlight"><span class="win-pill">★ $49 Dev / $69 Pro</span></td>
+                <td><span class="neutral-text">$55 (5 NFC) / $95 (Bio)</span></td>
+                <td><span class="neutral-text">$35–$40 (Basic, no screen/bio)</span></td>
+                <td><span class="loss-text">$79 – $179</span></td>
+                <td><span class="loss-text">"Free" (Monetized User Data)</span></td>
               </tr>
             </tbody>
           </table>
@@ -1207,19 +1560,243 @@
       btn.parentElement.classList.toggle('open');
     }
 
-    // Interactive Demo
-    function simService(domain, user) {
-      document.getElementById('demoDomain').textContent = `Sign in to ${domain}`;
-      document.getElementById('demoSub').textContent = `Account: ${user}`;
-      document.getElementById('demoStatus').textContent = 'Awaiting Fingerprint';
-      document.getElementById('demoStatus').style.color = 'var(--primary)';
-      document.getElementById('demoTouchBtn').style.display = 'inline-flex';
+    // Interactive Demo Simulation Engine
+    let currentScenario = 'passkey';
+    let currentService = { domain: 'github.com', user: 'alex.dev@github.com', challenge: '0x9e4a...88f1' };
+    let totpIndex = 0;
+    const totpList = [
+      { service: 'AWS Cloud Admin', code: '849 203', issuer: 'Amazon Web Services' },
+      { service: 'GitHub Enterprise', code: '319 840', issuer: 'GitHub.com' },
+      { service: 'Cloudflare ZeroTrust', code: '571 092', issuer: 'Cloudflare Inc.' },
+      { service: 'ProtonMail Encrypted', code: '604 185', issuer: 'Proton AG' }
+    ];
+    let totpSeconds = 24;
+    let totpTimer = null;
+
+    function setDemoScenario(scenario) {
+      currentScenario = scenario;
+      clearInterval(totpTimer);
+
+      document.querySelectorAll('.demo-tab-btn').forEach(btn => btn.classList.remove('active'));
+      const activeTab = document.getElementById(`tab-${scenario}`);
+      if (activeTab) activeTab.classList.add('active');
+
+      const screen = document.getElementById('oledScreen');
+      screen.className = 'oled-screen';
+
+      const modeHeader = document.getElementById('oledHeaderMode');
+      const statusHeader = document.getElementById('oledHeaderStatus');
+      const oledTitle = document.getElementById('oledTitle');
+      const oledDesc = document.getElementById('oledDesc');
+      const oledBadge = document.getElementById('oledBadge');
+
+      const ctrlTitle = document.getElementById('controllerTitle');
+      const ctrlDesc = document.getElementById('controllerDesc');
+      const ctrlActions = document.getElementById('controllerActions');
+      const ctrlLog = document.getElementById('controllerLog');
+
+      if (scenario === 'passkey') {
+        modeHeader.textContent = 'WEBAUTHN FIDO2';
+        statusHeader.textContent = 'BLE ● BAT 98%';
+        oledTitle.textContent = currentService.domain;
+        oledDesc.innerHTML = `User: ${currentService.user}<br>Challenge: ${currentService.challenge}`;
+        oledBadge.innerHTML = '<span>[ TOUCH SENSOR TO APPROVE ]</span>';
+
+        ctrlTitle.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="var(--primary)"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg><span>FIDO2 / WebAuthn Sign-In</span>';
+        ctrlDesc.textContent = 'Select a service below to trigger a real-time WebAuthn challenge. Cryptick displays the exact Relying Party domain before prompting for your fingerprint.';
+        ctrlActions.innerHTML = `
+          <button class="btn btn-ghost" onclick="simService('github.com', 'alex.dev@github.com')">GitHub</button>
+          <button class="btn btn-ghost" onclick="simService('google.com', 'user@gmail.com')">Google</button>
+          <button class="btn btn-ghost" onclick="simService('aws.amazon.com', 'root-admin')">AWS</button>
+          <button class="btn btn-primary" onclick="touchSensor()">👆 Touch Fingerprint</button>
+        `;
+        ctrlLog.innerHTML = `<strong>[WEBAUTHN READY]</strong> Awaiting fingerprint verification for <strong>${currentService.domain}</strong>...`;
+      } else if (scenario === 'phishing') {
+        modeHeader.textContent = 'SECURITY INTERCEPTOR';
+        statusHeader.textContent = 'BLE ● BAT 98%';
+        oledTitle.textContent = 'Awaiting Link...';
+        oledDesc.innerHTML = 'Click an action below to simulate a real-world phishing attack.';
+        oledBadge.innerHTML = '<span>[ PHISHING SHIELD ACTIVE ]</span>';
+
+        ctrlTitle.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent-red)"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg><span>Phishing Interception Demo</span>';
+        ctrlDesc.textContent = 'Legacy hardware keys tap blindly without a screen, leaving you exposed to AiTM phishing proxies. See what happens when a scammer sends you to a fake domain.';
+        ctrlActions.innerHTML = `
+          <button class="btn btn-danger" style="background:rgba(255,82,82,0.15); border-color:#FF5252; color:#FF5252;" onclick="simPhishingAttack()">⚠ Simulate Phishing Link</button>
+          <button class="btn btn-ghost" onclick="simLegitDomain()">✓ Simulate Legit google.com</button>
+        `;
+        ctrlLog.innerHTML = '<strong>[GUARD]</strong> Ready. Click "Simulate Phishing Link" to test attacker interception.';
+      } else if (scenario === 'totp') {
+        modeHeader.textContent = 'STANDALONE 2FA (TOTP)';
+        statusHeader.textContent = 'ON-BOARD BAT 98%';
+        renderTotpScreen();
+
+        ctrlTitle.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="var(--primary)"><path d="M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42C16.07 4.74 14.12 4 12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg><span>Standalone 2FA / TOTP Authenticator</span>';
+        ctrlDesc.textContent = 'View rotating verification codes directly on Cryptick’s screen without waking your phone or depending on cloud authenticator apps. Completely isolated and battery-powered.';
+        ctrlActions.innerHTML = `
+          <button class="btn btn-primary" onclick="cycleTotp()">Next Account ▶</button>
+          <button class="btn btn-ghost" onclick="copyTotpCode()">Copy Code</button>
+        `;
+        ctrlLog.innerHTML = `<strong>[STANDALONE]</strong> Account ${totpIndex + 1} of ${totpList.length}: <strong>${totpList[totpIndex].service}</strong>. Time-step: 30s.`;
+
+        startTotpCountdown();
+      } else if (scenario === 'piv') {
+        modeHeader.textContent = 'PIV SMARTCARD (SP 800-73)';
+        statusHeader.textContent = 'USB-C ● SLOT 9A';
+        oledTitle.textContent = 'macOS & Git SSH Auth';
+        oledDesc.innerHTML = 'Subject: CN=Alex Mercer<br>Algorithm: NIST P-256 (ECC)';
+        oledBadge.innerHTML = '<span>[ TOUCH SENSOR TO SIGN ]</span>';
+
+        ctrlTitle.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="var(--primary)"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg><span>macOS SmartCard / PIV & Git SSH</span>';
+        ctrlDesc.textContent = 'Cryptick acts as a hardware smart card for macOS workstation login, sudo terminal prompts, and hardware-backed Git commit signing via ssh-agent.';
+        ctrlActions.innerHTML = `
+          <button class="btn btn-ghost" onclick="simPivAction('sudo')">Test sudo Terminal Unlock</button>
+          <button class="btn btn-ghost" onclick="simPivAction('git')">Test Git Commit Sign</button>
+          <button class="btn btn-primary" onclick="touchSensor()">👆 Touch Fingerprint</button>
+        `;
+        ctrlLog.innerHTML = '<strong>[PIV READY]</strong> Card Transceiver listening on AID A0 00 00 03 08 00 00 10 00.';
+      }
     }
-    function simApprove() {
-      document.getElementById('demoStatus').textContent = '✓ Verified in 0.2s';
-      document.getElementById('demoStatus').style.color = 'var(--accent-green)';
-      document.getElementById('demoTouchBtn').style.display = 'none';
-      showToast('Biometric signature approved!');
+
+    function simService(domain, user) {
+      currentService = {
+        domain: domain,
+        user: user,
+        challenge: '0x' + Math.random().toString(16).substring(2, 10) + '...' + Math.random().toString(16).substring(2, 6)
+      };
+      const screen = document.getElementById('oledScreen');
+      screen.className = 'oled-screen';
+      document.getElementById('oledTitle').textContent = domain;
+      document.getElementById('oledDesc').innerHTML = `User: ${user}<br>Challenge: ${currentService.challenge}`;
+      document.getElementById('oledBadge').innerHTML = '<span>[ TOUCH SENSOR TO APPROVE ]</span>';
+
+      document.getElementById('controllerLog').innerHTML = `<strong>[REQUEST]</strong> WebAuthn ceremony initiated for <strong>${domain}</strong>. Awaiting physical biometric touch.`;
+      showToast(`Challenge received from ${domain}`);
+    }
+
+    function touchSensor() {
+      const screen = document.getElementById('oledScreen');
+      const sensor = document.getElementById('sensorBtn');
+
+      sensor.style.transform = 'scale(0.92)';
+      setTimeout(() => sensor.style.transform = '', 180);
+
+      if (currentScenario === 'passkey') {
+        screen.className = 'oled-screen state-success';
+        document.getElementById('oledTitle').textContent = '✓ IDENTITY VERIFIED';
+        document.getElementById('oledDesc').innerHTML = `Domain: ${currentService.domain}<br>Assertion: ECDSA-P256 Signed`;
+        document.getElementById('oledBadge').innerHTML = '<span style="color:#00E676;">[ SIGNATURE APPROVED (0.18s) ]</span>';
+
+        document.getElementById('controllerLog').innerHTML = `<strong>[SUCCESS]</strong> Biometric match confirmed in 0.18s. Private key signed challenge for <strong>${currentService.domain}</strong>. Access granted!`;
+        showToast('✓ Authentication Successful!');
+      } else if (currentScenario === 'phishing') {
+        showToast('⚠ Signature was blocked due to domain mismatch.');
+      } else if (currentScenario === 'totp') {
+        cycleTotp();
+      } else if (currentScenario === 'piv') {
+        screen.className = 'oled-screen state-success';
+        document.getElementById('oledTitle').textContent = '✓ SMARTCARD SIGNED';
+        document.getElementById('oledDesc').innerHTML = 'Slot 9A: Auth Successful<br>Token: NIST SP 800-73-5';
+        document.getElementById('oledBadge').innerHTML = '<span style="color:#00E676;">[ SIGNATURE RELEASED ]</span>';
+
+        document.getElementById('controllerLog').innerHTML = '<strong>[PIV SUCCESS]</strong> Transceived command APDU 0x87 (GENERAL AUTHENTICATE). Assertion returned to macOS security framework.';
+        showToast('✓ SmartCard authentication complete!');
+      }
+    }
+
+    function simPhishingAttack() {
+      const screen = document.getElementById('oledScreen');
+      screen.className = 'oled-screen state-alert';
+      document.getElementById('oledTitle').textContent = '⚠ PHISHING BLOCKED!';
+      document.getElementById('oledDesc').innerHTML = 'Origin: <strong>g00gle.verify-acc.xyz</strong><br>Mismatch: Target is NOT google.com';
+      document.getElementById('oledBadge').innerHTML = '<span style="color:#FF5252;">[ SIGNATURE REFUSED ]</span>';
+
+      document.getElementById('controllerLog').innerHTML = '<strong style="color:#FF5252;">[ATTACK DETECTED]</strong> Malicious website requested credentials for Google. Cryptick detected relying party origin mismatch and refused to sign. Blind keys would have approved this blindly!';
+      showToast('⚠ Phishing attempt automatically blocked!');
+    }
+
+    function simLegitDomain() {
+      const screen = document.getElementById('oledScreen');
+      screen.className = 'oled-screen state-success';
+      document.getElementById('oledTitle').textContent = 'google.com';
+      document.getElementById('oledDesc').innerHTML = 'Origin: <strong>accounts.google.com</strong><br>RP ID: google.com (Valid)';
+      document.getElementById('oledBadge').innerHTML = '<span style="color:#00E676;">[ ORIGIN VERIFIED - TOUCH SENSOR ]</span>';
+
+      document.getElementById('controllerLog').innerHTML = '<strong>[VERIFIED]</strong> Cryptographic origin matches authentic google.com. Safe to approve.';
+      showToast('✓ Genuine domain confirmed');
+    }
+
+    function renderTotpScreen() {
+      const item = totpList[totpIndex];
+      document.getElementById('oledTitle').textContent = item.service;
+      document.getElementById('oledDesc').innerHTML = `
+        <span style="font-size:20px; font-weight:800; letter-spacing:3px; color:#FFF;">${item.code}</span><br>
+        <span style="font-size:11px; opacity:0.8;">Issuer: ${item.issuer}</span>
+      `;
+      document.getElementById('oledBadge').innerHTML = `
+        <div class="totp-timer-wrap">
+          <svg class="totp-ring-svg" viewBox="0 0 24 24">
+            <circle class="totp-ring-bg" cx="12" cy="12" r="10"></circle>
+            <circle class="totp-ring-bar" id="totpRingBar" cx="12" cy="12" r="10"></circle>
+          </svg>
+          <span id="totpSecText">${totpSeconds}s remaining</span>
+        </div>
+      `;
+    }
+
+    function startTotpCountdown() {
+      clearInterval(totpTimer);
+      totpTimer = setInterval(() => {
+        totpSeconds--;
+        if (totpSeconds <= 0) {
+          totpSeconds = 30;
+          totpList.forEach(item => {
+            item.code = Math.floor(100000 + Math.random() * 900000).toString().replace(/(\d{3})(\d{3})/, '$1 $2');
+          });
+        }
+        const bar = document.getElementById('totpRingBar');
+        const text = document.getElementById('totpSecText');
+        if (bar) {
+          const offset = 63 - (totpSeconds / 30) * 63;
+          bar.style.strokeDashoffset = offset;
+        }
+        if (text) {
+          text.textContent = `${totpSeconds}s remaining`;
+        }
+      }, 1000);
+    }
+
+    function cycleTotp() {
+      totpIndex = (totpIndex + 1) % totpList.length;
+      renderTotpScreen();
+      document.getElementById('controllerLog').innerHTML = `<strong>[ACCOUNT CHANGED]</strong> Now displaying TOTP slot ${totpIndex + 1} of ${totpList.length}: <strong>${totpList[totpIndex].service}</strong>.`;
+      showToast(`Switched to ${totpList[totpIndex].service}`);
+    }
+
+    function copyTotpCode() {
+      const code = totpList[totpIndex].code.replace(/\s+/g, '');
+      navigator.clipboard.writeText(code).then(() => {
+        showToast(`Copied ${code} to clipboard!`);
+      }).catch(() => {
+        showToast(`Code: ${code}`);
+      });
+    }
+
+    function simPivAction(type) {
+      const screen = document.getElementById('oledScreen');
+      screen.className = 'oled-screen';
+      if (type === 'sudo') {
+        document.getElementById('oledTitle').textContent = 'sudo Prompt: Terminal';
+        document.getElementById('oledDesc').innerHTML = 'Operation: Privileged Command<br>Slot 9A: NIST P-256 Key';
+        document.getElementById('oledBadge').innerHTML = '<span>[ TOUCH SENSOR TO AUTHORIZE ]</span>';
+        document.getElementById('controllerLog').innerHTML = '<strong>[SUDO PROMPT]</strong> macOS pam_smartcard requested cryptographic signature for terminal authorization.';
+        showToast('macOS sudo challenge received');
+      } else {
+        document.getElementById('oledTitle').textContent = 'Git SSH Commit Sign';
+        document.getElementById('oledDesc').innerHTML = 'Commit: 9d8b1e4 (main)<br>Slot 9C: Digital Signature';
+        document.getElementById('oledBadge').innerHTML = '<span>[ TOUCH SENSOR TO SIGN ]</span>';
+        document.getElementById('controllerLog').innerHTML = '<strong>[GIT COMMIT]</strong> ssh-agent requested digital signature on commit hash. Touch sensor to release.';
+        showToast('Git commit signature requested');
+      }
     }
   </script>
 </body>
