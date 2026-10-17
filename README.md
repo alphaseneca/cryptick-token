@@ -24,7 +24,7 @@
 - **Biometric Optical Enclave**: R558S capacitive/optical fingerprint sensor (508 DPI, 120 slots) keeps biometric templates completely offline in isolated silicon.
 - **Dual-Mode Connectivity**: Plug in directly via native **USB OTG** or authenticate wirelessly using **Bluetooth Low Energy (BLE 5.0)** with dual-GATT architecture.
 - **Full Protocol Suite**: FIDO2 CTAP2.1 Passkeys, NIST SP 800-73-5 PIV SmartCard, RFC 6238 OATH-TOTP standalone authenticator, and native OpenSSH hardware keys.
-- **1-Click Computer Login**: Instant macOS SmartCard pairing (`sc_auth` / CryptoTokenKit) and Linux PAM login.
+- **PIV Computer Login** *(in development)*: macOS SmartCard pairing (`sc_auth` / CryptoTokenKit) and Linux PAM login are designed around the on-device PIV applet — the applet and CCID protocol are implemented and unit-tested, but OS pairing/unlock is not yet verified on real hardware.
 
 ---
 
@@ -36,7 +36,7 @@ This repository serves as the central consolidator and product home for the enti
 | :--- | :--- | :--- | :--- |
 | **Hardware & PCB** | [`cryptick-token-pcb`](https://github.com/alphaseneca/cryptick-token-pcb) | 2-layer PCB design, schematics, BOM, and JLCPCB manufacturing release | KiCad 8.x, KiForge |
 | **Firmware & Core** | [`cryptick-token-code`](https://github.com/alphaseneca/cryptick-token-code) | ESP32-S3 firmware, CTAP2.1, PIV CCID applet, BLE GATT, and LittleFS enclave | C++ / PlatformIO |
-| **Desktop Daemon & CLI** | [`cryptick-token-daemon`](https://github.com/alphaseneca/cryptick-token-daemon) | Background daemon, `cryptick` CLI, macOS SmartCard / Linux PAM, OpenSSH middleware | Rust (Cargo) |
+| **Desktop Daemon & CLI** | [`cryptick-token-daemon`](https://github.com/alphaseneca/cryptick-token-daemon) | Background daemon, `cryptick` CLI, OpenSSH middleware, PIV login bridge (in development) | Rust (Cargo) |
 | **Browser Extension** | [`cryptick-token-extension`](https://github.com/alphaseneca/cryptick-token-extension) | Manifest V3 WebExtension passkey bridge and live 30s TOTP companion | JavaScript / MV3 |
 
 ```
@@ -56,6 +56,11 @@ This repository serves as the central consolidator and product home for the enti
                                                                  │  (WebExtension Bridge)   │
                                                                  └──────────────────────────┘
 ```
+
+> The diagram above shows how the repos nest as submodules. For how they
+> actually talk to each other at runtime — which repo calls which, over BLE,
+> USB, native messaging, or WebAuthn — see
+> [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ---
 
@@ -90,7 +95,7 @@ git submodule update --remote --merge
 | **Wired Connection** | **Native USB OTG** | USB | USB | USB |
 | **100% Open Hardware & Code** | **Full KiCad & C++/Rust** | Proprietary Closed | Proprietary Closed | Open Source |
 | **Standalone TOTP 2FA Display** | **Direct on Screen** | Requires App | Not Supported | Not Supported |
-| **1-Click Computer Login** | **macOS & Linux PAM** | Complex Setup | Limited | Limited |
+| **Computer Login (PIV)** | **In Development** | Complex Setup | Limited | Limited |
 | **Rechargeable Battery** | **Integrated LiPo (BQ25185)** | No Battery | No Battery | No Battery |
 | **Starting Price** | **$49 DevKit / $69 Pro** | $55 | $90+ | $50 |
 
