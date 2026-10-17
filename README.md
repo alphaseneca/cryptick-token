@@ -82,7 +82,7 @@ git submodule update --remote --merge
 
 ## Cryptick Token vs. The Competition
 
-| Feature | Cryptick Token | YubiKey 5 NFC | YubiKey Bio | SoloKeys Solo 2 |
+| Feature | Cryptick Token | Standard USB/NFC Key | Biometric USB Key | Open-Source USB Key |
 | :--- | :---: | :---: | :---: | :---: |
 | **Physical Display (WYSIWYS)** | **0.96" OLED Screen** | None (Blind Touch) | None (Blind Touch) | None |
 | **Biometric Fingerprint Sensor** | **508 DPI Enclave** | None | Capacitive Area | None |
