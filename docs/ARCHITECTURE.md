@@ -144,8 +144,7 @@ flowchart LR
 - [`cryptick-token-daemon/README.md`](../cryptick-token-daemon/README.md) · [`PROJECT.md`](../cryptick-token-daemon/PROJECT.md) · [`docs/ARCHITECTURE.md`](../cryptick-token-daemon/docs/ARCHITECTURE.md) · [`docs/COMPUTER_LOGIN.md`](../cryptick-token-daemon/docs/COMPUTER_LOGIN.md) — transport mechanisms, GATT service map, PIV/VPCD relay
 - [`cryptick-token-extension/README.md`](../cryptick-token-extension/README.md) — extension bridge, installation
 
-Two research memos also live under [`docs/research/`](research/) —
-[`org-presence-gating.md`](research/org-presence-gating.md) and
+A research memo also lives under [`docs/research/`](research/) —
 [`multi-device-and-credential-sync.md`](research/multi-device-and-credential-sync.md).
-They are exploratory notes, not implemented architecture, and are intentionally
+It is an exploratory note, not implemented architecture, and is intentionally
 kept separate from this document.
