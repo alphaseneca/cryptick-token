@@ -1,46 +1,23 @@
-# Multiple tokens per person: management and credential sync
+# Hardware-to-hardware credential sync
 
-Status: **research only, nothing implemented.** Written to settle the
-architecture decision before any code gets written against it, the same
-way the presence-gating note was.
+Status: **research only, nothing implemented** — this is the one open
+question below. Multi-device management (the other half this doc
+originally covered) shipped; see "Resolved" below.
 
-## 1. Multi-device management: doesn't exist today, confirmed in the code
+## Resolved: multi-device management
 
-Checked directly rather than assumed. `webauthn-host`'s USB discovery
-(`crates/webauthn-host/src/usb.rs`, `UsbClient::try_connect`) enumerates
-every HID interface matching the Cryptick VID/PID, sorts them by which
-looks most like the real FIDO interface, and connects to whichever sorts
-first. That sort is resolving *which interface of one physical token* to
-talk to (a token exposes more than one HID interface) — it has no concept
-of a second, independent physical token. If you plug in two Cryptick
-Tokens at once today, the host will find both devices' interfaces mixed
-together in that one list and just connect to whichever wins the sort. No
-device identity, no "known devices" list, no "switch to my other key"
-action exists anywhere in the daemon, the CLI, or the extension.
+This doc originally argued multi-device management (stable device
+identity, a known-devices list, an active-device concept, a picker UI)
+didn't exist and needed building. It's since been built: `cryptick-token-daemon`'s
+`feature/credential-management-and-multidevice` branch implemented it
+(`crates/daemon/src/devices.rs`'s `DeviceStore` — device identity,
+`known_devices.json`, `record_seen`/`list`/active-device tracking —
+plus `select_device` over IPC and a device picker in the extension's
+`popup.js`). See that repo's `NOTES.md` for the detail. Nothing left to
+decide here; this paragraph is kept only so this doc doesn't look
+unfinished to a future reader.
 
-### What real support requires, minimum
-
-1. **A stable device identity.** The USB/BLE descriptors already carry a
-   serial number field (standard HID/USB descriptor data) — confirm it's
-   actually populated and unique per unit on this board (don't assume;
-   check a real descriptor dump). That becomes the key for everything
-   below.
-2. **A known-devices list**, kept by the daemon (not the extension — the
-   extension is a thin client over the daemon, per the existing
-   architecture), keyed by that identity: a friendly name, last-seen
-   transport, maybe which one is "default."
-3. **An explicit "active device" concept** exposed over IPC, so `tools/cryptick`
-   and the extension both show the same answer to "which key am I talking
-   to right now" and both can switch it.
-4. **UI**: a device picker (CLI flag, extension dropdown) wherever an
-   operation needs to target a specific one, rather than "whichever sorts
-   first."
-
-None of this is security-sensitive by itself — it's bookkeeping. It's a
-real feature to build, not a quick fix, but there's no hard design
-question blocking it the way there is for §2.
-
-## 2. "Encrypted sync between two physical tokens" — the part that needs a decision before any code
+## Hardware-to-hardware clone — the part that still needs a decision before any code
 
 ### Restating the ask
 
@@ -128,11 +105,13 @@ patch — closer in size to the PIV-over-BLE work than to a UI fix.
 
 ### What I'd actually do, in order
 
-1. Ship independent multi-registration (§2, "industry-standard answer")
-   now — it's cheap, secure, and solves the real user problem.
-2. Ship basic multi-device management (§1) — bookkeeping, not a security
-   question.
+1. ~~Ship independent multi-registration ("industry-standard answer" above)
+   now — it's cheap, secure, and solves the real user problem.~~ Still the
+   right default to point users at; no code change needed, since it's just
+   registering a credential twice.
+2. ~~Ship basic multi-device management — bookkeeping, not a security
+   question.~~ **Done** — see "Resolved" above.
 3. Treat hardware-to-hardware clone as a separate, explicitly-scoped
    future feature, built only with a clear decision already made about
    the certification/claims tradeoff above — not bundled into "sync
-   support" as if it were the same thing as #1.
+   support" as if it were the same thing as independent multi-registration.
